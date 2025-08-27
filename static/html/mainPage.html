@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Weather App</title>
+  <link rel="stylesheet" href="../../static/CSS/main.css" />
+  <script type="module" src="../js/index.js" defer></script>
+</head>
+
+<body>
+  <section class="top-banner">
+    <div class="container">
+      <h1 class="heading" id="heading">Simple Weather App</h1>
+
+      <form id="SearchForm" aria-label="City weather search">
+        <input
+          type="text"
+          placeholder="Search for a city"
+          name="city"
+          autocomplete="off"
+          aria-label="City name"
+          required
+          autofocus
+        />
+        <button type="submit">SUBMIT</button>
+        <span class="msg" aria-live="polite"></span>
+      </form>
+
+      <!-- Search result for a single city -->
+      <div class="search-content"></div>
+
+      <!-- Grid of predefined cities -->
+      <div class="list-container"></div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,209 @@
+:root {
+  --bg_main: #0a1f44;
+  --text_light: #ffffff;
+  --text_med: #a3b1c6;
+  --text_dark: #1e2432;
+  --red: #ff1e42;
+  --darkred: #c3112d;
+  --orange: #ff8c00;
+  --card_bg: #ffffff;
+  --card_shadow: rgba(0, 0, 0, 0.15);
+  --gradient: linear-gradient(135deg, #219be4 0%, #6258a6 100%);
+  --transition: 0.3s ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.6;
+  background: var(--bg_main);
+  color: var(--text_light);
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HEADER */
+.heading {
+  font-weight: bold;
+  font-size: 3.5rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 30px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+/* FORM */
+.top-banner form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.top-banner input {
+  flex: 1 1 300px;
+  font-size: 1.2rem;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  background: #ffffff;
+  color: var(--text_dark);
+}
+
+.top-banner input:focus {
+  border-color: var(--orange);
+  outline: none;
+}
+
+.top-banner button {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 8px;
+  background: var(--red);
+  color: var(--text_light);
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+/* Optional: Dynamic hover colors for button (based on a class applied in JS) */
+.top-banner button.sunny:hover { background: #f7c948; color: #000; }
+.top-banner button.cloudy:hover { background: #888888; color: #fff; }
+.top-banner button.rainy:hover { background: #219be4; color: #fff; }
+.top-banner button.snowy:hover { background: #8ecae6; color: #000; }
+.top-banner button.stormy:hover { background: #6a0dad; color: #fff; }
+.top-banner button.default:hover { background: var(--darkred); }
+
+/* OUTER CARD */
+.weather-card {
+  background: var(--card_bg);
+  color: var(--text_dark);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 20px var(--card_shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Lift and shadow on hover/focus for better affordance */
+.weather-card:hover,
+.weather-card:focus-within {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px var(--card_shadow);
+}
+
+.weather-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 14px;
+  color: var(--text_dark);
+}
+
+/* INNER (“SUB”) CARD — neutral by default */
+.weather-inner {
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  background: var(--card_bg);      /* neutral background initially */
+  color: var(--text_dark);         /* readable on light background */
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Icon size and gentle motion */
+.icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  display: inline-block;
+  transition: transform var(--transition);
+}
+
+/* Paragraph spacing in both outer and inner blocks */
+.weather-card p,
+.weather-inner p {
+  margin: 6px 0;
+}
+
+/* THEME GRADIENTS (apply ONLY on hover/focus of the outer card) */
+.weather-card:hover .weather-inner.theme-sunny,
+.weather-card:focus-within .weather-inner.theme-sunny {
+  background: linear-gradient(135deg, #fdb813 0%, #ff7e00 100%);
+  color: #000;
+}
+.weather-card:hover .weather-inner.theme-cloudy,
+.weather-card:focus-within .weather-inner.theme-cloudy {
+  background: linear-gradient(135deg, #8e9eab 0%, #eef2f3 100%);
+  color: #1e2432;
+}
+.weather-card:hover .weather-inner.theme-rainy,
+.weather-card:focus-within .weather-inner.theme-rainy {
+  background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+  color: #fff;
+}
+.weather-card:hover .weather-inner.theme-snowy,
+.weather-card:focus-within .weather-inner.theme-snowy {
+  background: linear-gradient(135deg, #83a4d4 0%, #b6fbff 100%);
+  color: #1e2432;
+}
+.weather-card:hover .weather-inner.theme-stormy,
+.weather-card:focus-within .weather-inner.theme-stormy {
+  background: linear-gradient(135deg, #373b44 0%, #4286f4 100%);
+  color: #fff;
+}
+.weather-card:hover .weather-inner.theme-default,
+.weather-card:focus-within .weather-inner.theme-default {
+  background: var(--gradient);
+  color: #fff;
+}
+
+/* A little delight: scale the icon when the inner card is themed on hover */
+.weather-card:hover .weather-inner .icon,
+.weather-card:focus-within .weather-inner .icon {
+  transform: scale(1.06);
+}
+
+/* CITY LIST -> responsive columns */
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  align-items: stretch;
+}
+
+/* FOOTER (if present) */
+.page-footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text_med);
+}
+.page-footer span { color: var(--red); }
+
+/* Reduced motion: keep the design accessible */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .heading { font-size: 2.5rem; }
+}
